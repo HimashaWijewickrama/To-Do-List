@@ -1,6 +1,6 @@
 # To-Do List using react, typescript and react bootstrap
 
-## Used Packages and Dependecies
+## Used Packages and Dependencies
 
 - react datepicker. 
 - react icons. 
