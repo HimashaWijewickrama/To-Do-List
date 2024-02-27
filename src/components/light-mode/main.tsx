@@ -76,9 +76,9 @@ export const Main = () => {
 
   const handleClearClick = () => {
     setInputValue("");
-    console.log(inputValue)
+    console.log(inputValue);
     setSelectValue(null);
-    console.log(selectValue)
+    console.log(selectValue);
     // (window.location.reload as (cache: boolean) => void)(false);
   };
 
