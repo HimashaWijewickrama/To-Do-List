@@ -1,4 +1,12 @@
-# To-Do List using react, typescript and bootstrap
+# To-Do List using react, typescript and react bootstrap
+
+## Used Packages and Dependecies
+
+- react datepicker.\
+- react icons.\
+- sweetalert2.\
+- react router dom.\
+- bootstrap 5.\
 
 ## Available Scripts
 
