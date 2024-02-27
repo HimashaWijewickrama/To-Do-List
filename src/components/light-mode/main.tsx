@@ -16,7 +16,7 @@ import { GrView, GrTrash } from "react-icons/gr";
 import { Header } from "../header";
 
 export const Main = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string | "">("");
   const [selectValue, setSelectValue] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<{ task: string; date: Date }[]>([]); // define the type of tasks as string[]
   const [show, setShow] = useState(false);
@@ -24,7 +24,7 @@ export const Main = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleHide = () => {
+  const handleDeleteClick = () => {
     setHide(false);
     Swal.fire({
       icon: "success",
@@ -33,7 +33,8 @@ export const Main = () => {
       footer: '<a href="#">Why do I have this issue?</a>',
     }).then((result) => {
       if (result.isConfirmed) {
-        (window.location.reload as (cache: boolean) => void)(false);
+        setInputValue("");
+        setSelectValue(null);
       }
     });
   };
@@ -74,7 +75,11 @@ export const Main = () => {
   };
 
   const handleClearClick = () => {
-    (window.location.reload as (cache: boolean) => void)(false);
+    setInputValue("");
+    console.log(inputValue)
+    setSelectValue(null);
+    console.log(selectValue)
+    // (window.location.reload as (cache: boolean) => void)(false);
   };
 
   return (
@@ -88,6 +93,7 @@ export const Main = () => {
           handleDateChange={handleDateChange}
           handleClearClick={handleClearClick}
           handleAddClick={handleAddClick}
+          inputValue={inputValue}
         />
         <div className="col-12">
           <div className="p-3 bg-light">
@@ -120,23 +126,26 @@ export const Main = () => {
 
                             <Button
                               variant="outline-danger"
-                              onClick={handleHide}
+                              onClick={handleDeleteClick}
                             >
                               <GrTrash /> Delete{" "}
                             </Button>
                           </ButtonGroup>
                           <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
-                              <Modal.Title className="fs-6">{task.task}</Modal.Title>
+                              <Modal.Title className="fs-6">
+                                View Task
+                              </Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>{task.date.toLocaleDateString()}
+                            <Modal.Body>
+                              Task Description: {task.task}
+                              <br />
+                              Scheduled Date: {task.date.toLocaleDateString()}{" "}
+                              <br />
                             </Modal.Body>
                             <Modal.Footer>
                               <Button variant="secondary" onClick={handleClose}>
                                 Close
-                              </Button>
-                              <Button variant="primary" onClick={handleClose}>
-                                Save Changes
                               </Button>
                             </Modal.Footer>
                           </Modal>

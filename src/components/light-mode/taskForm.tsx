@@ -7,7 +7,8 @@ import DatePicker from "react-datepicker";
 
 interface TaskFormProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  selectValue: Date | null; // Include selectValue in TaskFormProps
+  selectValue: Date | null;
+  inputValue: string | "";
   handleDateChange: (date: Date | null) => void;
   handleClearClick: () => void;
   handleAddClick: () => void;
@@ -20,17 +21,19 @@ export const TaskForm = (props: TaskFormProps) => {
         <Stack direction="horizontal" gap={3}>
           <Form.Control
             type="text"
+            value={props.inputValue}
             onChange={props.handleInputChange}
             className="me-auto"
-            placeholder="Add your item here..."
+            placeholder="Add your task here..."
             id="textInput"
           />
           <DatePicker
             showIcon
-            selected={props.selectValue} // Use props.selectValue to access the selectValue from props
-            onChange={props.handleDateChange} // Use props.handleDateChange to access the handleDateChange from props
+            selected={props.selectValue}
+            onChange={props.handleDateChange}
+            placeholderText="Select date..."
+            
           />
-
           <Button variant="secondary" onClick={props.handleAddClick}>
             <GrAdd />
             Add
@@ -40,7 +43,6 @@ export const TaskForm = (props: TaskFormProps) => {
             Clear
           </Button>
         </Stack>
-
         <hr />
       </div>
     </div>
