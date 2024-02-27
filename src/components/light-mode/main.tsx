@@ -11,16 +11,16 @@ import {
 import Stack from "react-bootstrap/Stack";
 import { TaskForm } from "./taskForm";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GrView, GrTrash } from "react-icons/gr";
 import { Header } from "../header";
 
 export const Main = () => {
   const [inputValue, setInputValue] = useState("");
-  const [tasks, setTasks] = useState<string[]>([]); // define the type of tasks as string[]
+  const [selectValue, setSelectValue] = useState<Date | null>(null);
+  const [tasks, setTasks] = useState<{ task: string; date: Date }[]>([]); // define the type of tasks as string[]
   const [show, setShow] = useState(false);
   const [hide, setHide] = useState(true);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -41,9 +41,13 @@ export const Main = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-
+  const handleDateChange = (date: Date | null) => {
+    setSelectValue(date ? date : null); // Update the selected value with the date object or null
+  };
   const handleAddClick = () => {
-    if (inputValue.trim() === "") {
+    console.log(inputValue);
+    console.log(selectValue);
+    if (inputValue.trim() === "" || selectValue === null) {
       Swal.fire({
         icon: "error",
         title: "Oops..",
@@ -51,8 +55,15 @@ export const Main = () => {
         footer: '<a href="#">Why do I have this issue?</a>',
       });
     } else {
-      setTasks([...tasks, inputValue]);
+      const newTask = {
+        task: inputValue,
+        date: selectValue,
+      };
+      console.log(newTask.date);
+      setTasks([...tasks, newTask]);
       setInputValue(""); // Clear input field after adding task
+      setSelectValue(null);
+      console.log(newTask);
       Swal.fire({
         icon: "success",
         title: "Done..",
@@ -69,10 +80,12 @@ export const Main = () => {
   return (
     <div className="container overflow-hidden">
       <div className="row gy-3">
-        <Header/>
+        <Header />
 
         <TaskForm
           handleInputChange={handleInputChange}
+          selectValue={selectValue} // Pass selectValue as a prop
+          handleDateChange={handleDateChange}
           handleClearClick={handleClearClick}
           handleAddClick={handleAddClick}
         />
@@ -90,7 +103,7 @@ export const Main = () => {
                             className="list-group-item list-group-item-action  text-start"
                           >
                             <Form.Label key={index} className="fs-6">
-                              ⚪ {task}
+                              ⚪ {task.task}
                               <br />
                             </Form.Label>
                           </ListGroup.Item>
@@ -114,11 +127,9 @@ export const Main = () => {
                           </ButtonGroup>
                           <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
-                              <Modal.Title className="fs-6">View
-                              </Modal.Title>
+                              <Modal.Title className="fs-6">{task.task}</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>
-                              {task}
+                            <Modal.Body>{task.date.toLocaleDateString()}
                             </Modal.Body>
                             <Modal.Footer>
                               <Button variant="secondary" onClick={handleClose}>
@@ -136,27 +147,6 @@ export const Main = () => {
                 </Container>
               </Stack>
             )}
-            {/* <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                {tasks.map((task, index) => (
-                  <Modal.Title key={index} className="fs-6">
-                    ⚪ {task}
-                    <br />
-                  </Modal.Title>
-                ))}
-              </Modal.Header>
-              <Modal.Body>
-                Woohoo, you are reading this text in a modal!
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
-            </Modal> */}
           </div>
         </div>
       </div>
