@@ -7,7 +7,7 @@ export const Header = () => {
     <div className="col-12">
       <div className="p-3 border bg-light">
         <Stack direction="horizontal" gap={3}>
-          <a href="/ToDo-List/li">
+          <a href="/ToDo-List">
             <Button
               variant="light "
               className="border border-dark rounded-pill fs-6"
