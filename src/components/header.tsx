@@ -1,11 +1,11 @@
 import Button from "react-bootstrap/esm/Button";
 import Stack from "react-bootstrap/esm/Stack";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
-
+import logo from "../assets/logo.png";
 export const Header = () => {
   return (
-    <div className="col-12">
-      <div className="p-3 border bg-light">
+    <div className="col-12 p-3 border" id="header-container">
+      {/* <div className="p-3 border"> */}
         <Stack direction="horizontal" gap={3}>
           <a href="/ToDo-List">
             <Button
@@ -21,8 +21,12 @@ export const Header = () => {
             </Button>
           </a>
         </Stack>
-        <p className="fw-bold fs-2 text-center">🗓️ MY TO-DO LIST</p>
-      </div>
+        <hr className="header-divider"/>
+
+        <span className="header-logo-circle">
+          <img src={logo} className="header-logo" />
+        </span>
+      {/* </div> */}
     </div>
   );
 };
