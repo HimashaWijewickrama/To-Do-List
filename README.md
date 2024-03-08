@@ -22,7 +22,11 @@ You will also see any lint errors in the console.
 
 ### `npm run build`
 
-App is ready to be deployed!
+Compiles the project for production.
+
+### `npm run deploy`
+
+Deploy the project to the hosting environment. (Here, GitHub pages) 
 
 Local:            http://localhost:3000/ToDo-List \
 On Your Network:  https://himashawijewickrama.github.io/ToDo-List/
