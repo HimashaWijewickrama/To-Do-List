@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/esm/Button";
 import Stack from "react-bootstrap/esm/Stack";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 export const Header = () => {
   return (
@@ -24,7 +24,7 @@ export const Header = () => {
       <hr className="header-divider" />
 
       <span className="header-logo-circle">
-        <img src={logo} className="header-logo" />
+        <img src={logo} className="header-logo" alt="My To-Do List"/>
       </span>
     </div>
   );

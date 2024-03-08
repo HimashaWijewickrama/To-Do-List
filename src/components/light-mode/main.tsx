@@ -13,7 +13,7 @@ import { TaskForm } from "./taskForm";
 import Swal from "sweetalert2";
 import React, { useState } from "react";
 import { GrView, GrTrash } from "react-icons/gr";
-import { Header } from "../header";
+import { Header } from "./header";
 
 export const Main = () => {
   const [inputValue, setInputValue] = useState<string | "">("");
