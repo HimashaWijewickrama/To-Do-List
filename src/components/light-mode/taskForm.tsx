@@ -31,7 +31,7 @@ export const TaskForm = (props: TaskFormProps) => {
             showIcon
             selected={props.selectValue}
             onChange={props.handleDateChange}
-            placeholderText="Select date..."
+            placeholderText=" Select date..."
           />
           <Button variant="secondary" onClick={props.handleAddClick}>
             <GrAdd />
