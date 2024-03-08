@@ -2,29 +2,43 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import { GrAdd, GrClear } from "react-icons/gr";
+import React from "react";
+import DatePicker from "react-datepicker";
 
-type TaskFormProps = {
+interface TaskFormProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  selectValue: Date | null;
+  inputValue: string | " ";
+  handleDateChange: (date: Date | null) => void;
   handleClearClick: () => void;
   handleAddClick: () => void;
-};
+}
+
 export const TaskForm = (props: TaskFormProps) => {
   return (
     <div className="col-12">
-      <div className="p-3 border bg-dark">
+      <div className="p-3 border bg-secondary">
         <Stack direction="horizontal" gap={3}>
           <Form.Control
             type="text"
+            value={props.inputValue}
             onChange={props.handleInputChange}
             className="me-auto"
-            placeholder="Add your item here..."
+            placeholder="Add your task here..."
             id="textInput"
           />
-          <Button variant="secondary" onClick={props.handleAddClick}>
+          <DatePicker
+            showPopperArrow={true}
+            selected={props.selectValue}
+            onChange={props.handleDateChange}
+            placeholderText=" Select date..."
+            className="form-control"
+          />
+          <Button variant="primary" onClick={props.handleAddClick}>
             <GrAdd />
             Add
           </Button>
-          <Button variant="outline-danger" onClick={props.handleClearClick}>
+          <Button variant="danger" onClick={props.handleClearClick}>
             <GrClear />
             Clear
           </Button>
