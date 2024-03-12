@@ -21,7 +21,7 @@ export const TaskForm = (props: TaskFormProps) => {
   return (
     <div className="col-12">
       <div className="p-3 border bg-light">
-        <Stack direction="horizontal" gap={1}>
+        <Stack direction="horizontal" gap={3}>
           <Form.Control
             type="text"
             value={props.inputValue}
@@ -37,9 +37,9 @@ export const TaskForm = (props: TaskFormProps) => {
             placeholderText=" Select date..."
             className="form-control"
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
             <TimePicker className="form-control" />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
 
           <Button variant="secondary" onClick={props.handleAddClick}>
             <GrAdd />
